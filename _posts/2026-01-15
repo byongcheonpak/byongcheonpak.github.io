@@ -1,0 +1,47 @@
+# Gemini 모델을 활용한 LogProb 활성화 및 분석
+
+---
+
+## 1. LogProb란 무엇인가?
+
+**LogProb(Log Probability)**는 언어 모델이 특정 토큰(Token)을 예측할 때 계산한 확률값에 로그를 취한 값입니다.
+
+* **수식:** $\text{LogProb} = \log(P)$ (단, $P$는 해당 토큰이 등장할 확률, $0 < P \le 1$)
+* **특징:**
+    * 확률값 $P$가 $1$(100%)일 때 LogProb는 **0**이 됩니다.
+    * 확률이 낮아질수록 LogProb는 **음수** 방향으로 커집니다 (예: -0.5는 높은 확신, -10.0은 낮은 확신).
+    * **수치적 안정성:** 아주 작은 확률값들을 곱하는 대신 로그값을 더함으로써 계산 오차를 줄일 수 있습니다.
+
+---
+
+## 2. Gemini API 설정 방법
+
+Gemini 1.5 모델 시리즈에서는 `generation_config`를 통해 LogProb 데이터를 요청할 수 있습니다.
+
+### 핵심 파라미터
+
+| 파라미터 | 데이터 타입 | 설명 |
+| :--- | :--- | :--- |
+| `response_logprobs` | `bool` | `True`로 설정 시 응답에 로그 확률 데이터가 포함됩니다. |
+| `logprobs` | `int` | 각 토큰 위치에서 확률이 높은 상위 $K$개의 후보를 반환합니다. (예: 1~5) |
+
+---
+
+## 3. Python 구현 예시
+
+`google-generativeai` 라이브러리를 사용한 LogProb 추출 코드입니다.
+
+```python
+import google.generativeai as genai
+
+# 모델 초기화
+model = genai.GenerativeModel('gemini-1.5-flash')
+
+# LogProb 옵션 적용하여 텍스트 생성
+response = model.generate_content(
+    "대한민국의 수도는 어디인가요?",
+    generation_config=genai.types.GenerationConfig(
+        response_logprobs=True,
+        logprobs=3
+    )
+)
