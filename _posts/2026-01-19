@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Spring AI: 자바 개발자를 위한 AI 프레임워크 완벽 정리"
+date: 2024-05-20 09:00:00 +0900
+categories: [Spring, AI]
+tags: [spring-ai, java, ai, llm]
+---
+
+# Spring AI: 자바 생태계에 들어온 인공지능
+
+최근 LLM(대형 언어 모델)의 발전으로 인해 많은 서비스에 AI 기능이 통합되고 있습니다. 파이썬 진영에는 LangChain이나 LlamaIndex 같은 강력한 프레임워크가 있다면, 자바/스프링 진영에는 **Spring AI**가 그 역할을 수행합니다.
+
+Spring AI는 스프링 프레임워크의 핵심 원칙인 '이식성'과 '모듈화'를 인공지능 애플리케이션 개발에 적용한 프로젝트입니다.
+
+---
+
+## 1. 핵심 철학 (Core Philosophy)
+
+Spring AI의 가장 큰 장점은 **추상화**입니다. 개발자는 특정 AI 제공자(OpenAI, Google, Anthropic 등)의 API에 종속되지 않고, 인터페이스를 통해 다양한 모델을 손쉽게 교체하며 사용할 수 있습니다.
+
+- **Portable API**: 코드 변경을 최소화하며 다양한 AI 모델 제공자를 교체 가능.
+- **Spring-friendly**: 의존성 주입(DI), 설정 외부화(Properties) 등 스프링의 특징을 그대로 활용.
+
+---
+
+## 2. 주요 기능 및 컴포넌트
+
+### 1) Chat Models (채팅 모델)
+다양한 LLM과 대화할 수 있는 인터페이스를 제공합니다.
+- **지원 모델**: OpenAI, Azure OpenAI, Amazon Bedrock, Google Vertex AI, Anthropic Claude, Ollama(로컬 실행) 등.
+
+### 2) Prompts (프롬프트)
+AI에게 전달하는 명령어인 프롬프트를 템플릿화하여 관리할 수 있습니다. `PromptTemplate`을 통해 동적으로 데이터를 바인딩할 수 있습니다.
+
+### 3) Output Parsers (출력 파서)
+AI의 응답(주로 텍스트)을 자바 객체(POJO)로 자동 매핑해줍니다. 더 이상 JSON 응답을 수동으로 파싱할 필요가 없습니다.
+
+### 4) RAG (Retrieval Augmented Generation) 지원
+가장 중요한 기능 중 하나인 **RAG(검색 증강 생성)**를 지원합니다.
+- **Vector Stores**: Pinecone, Milvus, Redis, Chroma, PostgreSQL(PGVector) 등 다양한 벡터 데이터베이스와 연동.
+- **ETL Pipeline**: 문서를 읽고(Reader), 분할하고(Transformer), 벡터화하여 저장하는 일련의 과정을 지원.
+
+---
+
+## 3. 시작하기 (Getting Started)
+
+Spring Boot 프로젝트에서 `application.yml` 설정만으로 간단히 시작할 수 있습니다.
+
+### 의존성 추가 (Maven 기준)
+```xml
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
+</dependency>
