@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "John Pak"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/johnlab-logo.png"
   bio              : # "I am an **amazing** person."
   location         : "Pangyo, South Korea"
   email            :
