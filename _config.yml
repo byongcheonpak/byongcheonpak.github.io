@@ -115,7 +115,7 @@ analytics:
 author:
   name             : "John Pak"
   avatar           : "/assets/images/johnlab-logo.png"
-  bio              : # "I am an **amazing** person."
+  bio              : "AI와 시스템 설계를 공부하며 기록하는 개발자. 배운 것과 삽질한 것을 남깁니다."
   location         : "Pangyo, South Korea"
   email            :
   links:
