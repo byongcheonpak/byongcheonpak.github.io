@@ -26,30 +26,10 @@ toc_sticky: true
 Spring AI는 다양한 AI 모델 제공자를 위한 단일 인터페이스를 제공합니다.
 - **지원 모델**: Chat, Embedding, Text-to-Image, Audio Transcription, TTS 등
 - **벤더**: OpenAI, Anthropic, Microsoft드
-```groovy
-@RestController
-public class ChatController {
-
-    private final ChatClient chatClient;
-
-    public ChatController(ChatClient.Builder builder) {
-        // ChatClient를 생성자에서 빌드합니다.
-        this.chatClient = builder.build();
-    }
-
-    @GetMapping("/ai/generate")
-    public String generate(@RequestParam(value = "message") String message) {
-        return chatClient.prompt()
-                .user(message) // 사용자 메시지 입력
-                .call()        // API 호출
-                .content();    // 응답 텍스트 추출
-    }
-}
-
 
 ---
 
-## 4. 자주 하는 실수 & 팁 (FAQ)
+## 3. 자주 하는 실수 & 팁 (FAQ)
 
 Q. 어떤 AI 모델을 써야 할지 고민입니다.
 
@@ -63,7 +43,7 @@ temperature 옵션을 조절해 보세요. 값이 낮을수록(0에 가까울수
 
 ---
 
-## 5. 다음 단계
+## 4. 다음 단계
 
 RAG 구현하기: VectorStore를 활용해 PDF 문서를 기반으로 대답하는 챗봇을 만들어 보세요.
 
